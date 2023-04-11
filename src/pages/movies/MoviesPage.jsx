@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
-import { Outlet, Link, useSearchParams } from "react-router-dom";
+import { Outlet, useSearchParams, useLocation } from "react-router-dom";
 import { searchMovieAPI } from "../../helpers/moviesAPI";
+import { Div, Form, Input, Button, List, ListItem, StyledLink } from "./MoviesPage.styled"
 
 export const MoviesPage = () =>{
     const [reqArr, setReqArr] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
     const query = searchParams.get('query');
+    const location = useLocation();
 
     useEffect(()=>{
         if (query){
@@ -28,20 +30,20 @@ export const MoviesPage = () =>{
     }
     
     return (
-        <div>        
-            <form action="" onSubmit={formHandler} >
-                <input type="text" placeholder="Enter film name"/>
-                <button type="submit">Search</button>
-            </form>
-            <ul>
+        <Div>        
+            <Form action="" onSubmit={formHandler} >
+                <Input type="text" placeholder="Enter film name"/>
+                <Button type="submit">Search</Button>
+            </Form>
+            <List>
                 {reqArr.data?.results.map(elem => {
-                    return <li key={elem.id}>
-                        <Link to={`${elem.id}`}>{elem.title}</Link>
-                    </li>
+                    return <ListItem key={elem.id}>
+                        <StyledLink to={`${elem.id}`} state={{from: location}}>{elem.title}</StyledLink>
+                    </ListItem>
                 })}
-            </ul>
+            </List>
 
             <Outlet/>
-        </div>
+        </Div>
     )
 }

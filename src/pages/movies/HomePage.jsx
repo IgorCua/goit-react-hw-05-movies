@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { requestAPI } from "../../helpers/moviesAPI";
 // import { TrendingList } from "components/movies/TrendingList";
-import {StyledLink} from "./HomePage.styled";
+import {StyledLink, Div, Nav, Text} from "./HomePage.styled";
 
 export const HomePage = () =>{
   const [popularFilms, setPopularFilms] = useState([]);
@@ -19,12 +19,12 @@ export const HomePage = () =>{
   }, [popularFilms])
    
   return (
-        <div>
-            <nav>
-                <StyledLink to="/goit-react-hw-05-movies/">Home</StyledLink>
-                <StyledLink to="/goit-react-hw-05-movies/movies">Movies</StyledLink>
-            </nav>
+        <Div>
+            <Nav>
+                <StyledLink to="/goit-react-hw-05-movies/"><Text>Home</Text></StyledLink>
+                <StyledLink to="/goit-react-hw-05-movies/movies"><Text>Movies</Text></StyledLink>
+            </Nav>
             <Outlet/>
-        </div>
+        </Div>
     )
 }

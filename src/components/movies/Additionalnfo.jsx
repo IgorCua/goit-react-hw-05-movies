@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { requestAPI } from "helpers/moviesAPI";
 import parse from 'html-react-parser';
-
+import { List, CastItem, Image, Title, Text, ReviewsItem} from "./AdditionalInfo.styled"; 
 
 export const AdditionalInfo = () => {
     const {id} = useParams();
@@ -30,25 +30,25 @@ export const AdditionalInfo = () => {
     }
 
     return (
-        <ul>
+        <List>
             {location === 'cast' && creditsObj.data?.cast.map(elem =>{
-                return <li key={elem.id}>
-                    <img src={requestObjCheck(elem)} alt="" />
-                    <p>{elem.name}</p>
-                    <p>{elem.character}</p>
-                </li>
+                return <CastItem key={elem.id}>
+                    <Image src={requestObjCheck(elem)} alt="" />
+                    <Title>{elem.name}</Title>
+                    <Text>{elem.character}</Text>
+                </CastItem>
             })}
 
             {location === 'reviews' && reviews.length === 0 
-                                    ? <p>This film have no reviews.</p>
+                                    ? <Title>This film have no reviews.</Title>
                                     : reviews.map(elem => {
-                                            return <li key={elem.id}>
-                                                <p>Author: {elem.author}</p>
-                                                <p>{parse(elem.content)}</p>
-                                            </li>
+                                            return <ReviewsItem key={elem.id}>
+                                                <Title>Author: {elem.author}</Title>
+                                                <Text>{parse(elem.content)}</Text>
+                                            </ReviewsItem>
                                         })
                                     
             }
-        </ul>
+        </List>
     )
 }

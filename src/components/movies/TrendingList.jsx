@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { requestAPI } from "../../helpers/moviesAPI";
+import { ListItem, StyledLink } from "./TrendingList.styled";
 
 export const TrendingList = () => {
     const [popularFilms, setPopularFilms] = useState([]);
+    const location = useLocation();
     
     useEffect(() => {
         if (popularFilms.length === 0) {
@@ -12,14 +14,14 @@ export const TrendingList = () => {
             });
         }
     }, [popularFilms]);
-
+    console.log('TrendingList location', location)
     return (
         <>
             {popularFilms.map(elem => {
                 return (
-                    <li key={elem.id}>
-                        <Link to={`movies/${elem.id}`}>{elem.title}</Link>
-                    </li> 
+                    <ListItem key={elem.id}>
+                        <StyledLink to={`movies/${elem.id}`} state={{from: location}}>{elem.title}</StyledLink>
+                    </ListItem> 
                 )
             })}
         </>

@@ -1,18 +1,20 @@
-import { useEffect, useState } from "react";
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import { requestAPI } from "../../helpers/moviesAPI";
 import {
     Section, 
     Div, 
-    Button, 
+    StyledLink, 
     Image, 
     List, 
     ListItem, 
     InfoDiv, 
     InfoTitle, 
     InfoList, 
-    InfoListItem
-} from "./MovieDetail.styled"
+    InfoListItem,
+    Title,
+    Text
+} from "./MovieDetail.styled";
 
 export const MovieDetails = () => {
     const API_KEY = "5aa25f9e8e2618b75e9d0b59d473edb9";
@@ -20,10 +22,16 @@ export const MovieDetails = () => {
     const {id} = useParams();
     const [movieObj, setMovieObj] = useState([]);
     // const [creditsObj, setCreditsObj] = useState([]);
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+    const location = useLocation();
+    const backLinkHref = location.state?.from;
+    
+    const locationRef = useRef(backLinkHref);
+    
     const genres = movieObj.genres?.map(e => {
         return e.name;
     }).join(', ');
+
 
     useEffect(()=>{
         if(movieObj.length === 0) requestAPI(id).then(req => setMovieObj(req.data));
@@ -33,40 +41,44 @@ export const MovieDetails = () => {
         return movieObj.poster_path === undefined ? "" : `${imgSourse}${movieObj.poster_path}?api_key=${API_KEY}`;
     }
 
-    function toHomePage () {
-        navigate("/goit-react-hw-05-movies/", { replace: true });
-    }
+    // function navigateBack () {
+    //     // navigate("/goit-react-hw-05-movies/", { replace: true });
+    //     navigate(backLinkHref);
+    // }
 
+    console.log('movieDetails ', location)
+    console.log('movieDetails ref', locationRef.current)
     return (
         <Section>
-            <Button onClick={toHomePage}>Go back</Button>
+            <StyledLink to={locationRef.current ?? "/goit-react-hw-05-movies/"}>Go back</StyledLink>
+            {/* <Button onClick={navigateBack}>Go back</Button> */}
             <Div>
                 <Image src={movieObjCheck()}></Image>
                 <List>
                     <ListItem>
-                        <p>{movieObj.title}</p>
-                        <p>User Score: {Math.floor(movieObj.vote_average * 10)}%</p>
+                        <Title>{movieObj.title}</Title>
+                        <Text>User Score: {Math.floor(movieObj.vote_average * 10)}%</Text>
                     </ListItem>
                     <ListItem>
-                        <p>Overview</p>
-                        <p>{movieObj.overview}</p>
+                        <Title>Overview</Title>
+                        <Text>{movieObj.overview}</Text>
                     </ListItem>
                     <ListItem>
-                        <p>Genres</p>
-                        <p>{genres}</p>
+                        <Title>Genres</Title>
+                        <Text>{genres}</Text>
                     </ListItem>
                 </List>
                 
                 <InfoDiv>
                     <InfoTitle>
-                        Additional information
+                        <Title>Additional information</Title>
                     </InfoTitle>
                     <InfoList>
                         <InfoListItem>
-                            <Link to='cast'>Cast</Link>
+                            <StyledLink to='cast'>Cast</StyledLink>
                         </InfoListItem>
                         <InfoListItem>
-                            <Link to='reviews'>Reviews</Link>
+                            <StyledLink to='reviews'>Reviews</StyledLink>
                         </InfoListItem>
                     </InfoList>
                 </InfoDiv>
