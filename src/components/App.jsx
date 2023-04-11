@@ -1,15 +1,16 @@
 import { Routes, Route } from "react-router-dom";
 // import { lazy, Suspense } from "react";
-import React, { lazy, Suspense } from "react";
+// import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import { HomePage } from "pages/movies/HomePage";
 import { TrendingPage } from "pages/movies/TrendingPage";
 import { MovieDetailsPage } from "../pages/movies/MovieDetailsPage";
 import { MoviesPage } from "pages/movies/MoviesPage";
 import { AdditionalInfo } from "./movies/Additionalnfo";
 
-const LazyMovieDetailsPage = React.lazy(() => import('../pages/movies/MovieDetailsPage'));
-const LazyAdditionalInfo = React.lazy(() => import('../components/movies/Additionalnfo'));
-const LazyMoviesPage = lazy(() => import('pages/movies/MoviesPage'));
+// const LazyMovieDetailsPage = React.lazy(() => import('../pages/movies/MovieDetailsPage'));
+// const LazyAdditionalInfo = React.lazy(() => import('../components/movies/Additionalnfo'));
+// const LazyMoviesPage = lazy(() => import('pages/movies/MoviesPage'));
 
 
 export const App = () => {
@@ -32,12 +33,6 @@ export const App = () => {
             <Route index element={<TrendingPage />}></Route>
             <Route path="movies" element={<MoviesPage/>}>
             </Route>
-            {/* <Suspense fallback={<div>Loading...</div>}>
-              <Route path="/movies/:id" element={<MovieDetailsPage/>}>
-                  <Route path="cast" element={<AdditionalInfo/>}></Route>
-                  <Route path="reviews" element={<AdditionalInfo/>}></Route>
-              </Route>
-            </Suspense> */}
             <Route path="/goit-react-hw-05-movies/movies/:id" element={<MovieDetailsPage/>}>
               <Route path="cast" element={<AdditionalInfo/>}></Route>
               <Route path="reviews" element={<AdditionalInfo/>}></Route>
