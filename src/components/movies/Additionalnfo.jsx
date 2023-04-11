@@ -21,7 +21,7 @@ export const AdditionalInfo = () => {
         if (location === 'reviews'){
             requestAPI(`${id}/reviews`).then(req => setReviewsObj(req));
         }
-    }, [location]);
+    }, [location, id]);
 
     // if (location === 'reviews') console.log('reviewsObj ', reviewsObj)
 

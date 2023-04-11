@@ -1,8 +1,9 @@
-import { Routes, Route, useParams } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { Routes, Route } from "react-router-dom";
+// import { lazy, Suspense } from "react";
+import { Suspense } from "react";
 import { HomePage } from "pages/movies/HomePage";
 import { TrendingPage } from "pages/movies/TrendingPage";
-import { MovieDetailsPage } from "../pages/movies/MovieDetailsPage"
+import { MovieDetailsPage } from "../pages/movies/MovieDetailsPage";
 import { MoviesPage } from "pages/movies/MoviesPage";
 import { AdditionalInfo } from "./movies/Additionalnfo";
 
@@ -10,7 +11,7 @@ import { AdditionalInfo } from "./movies/Additionalnfo";
 
 
 export const App = () => {
-const LazyMoviesPage = lazy(() => import('pages/movies/MoviesPage'));
+// const LazyMoviesPage = lazy(() => import('pages/movies/MoviesPage'));
   
 
   return (
