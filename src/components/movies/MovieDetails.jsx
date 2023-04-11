@@ -34,7 +34,7 @@ export const MovieDetails = () => {
     }
 
     function toHomePage () {
-        navigate("/", { replace: true });
+        navigate("/goit-react-hw-05-movies/", { replace: true });
     }
 
     return (

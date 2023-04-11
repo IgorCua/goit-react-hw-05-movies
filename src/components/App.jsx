@@ -27,7 +27,7 @@ export const App = () => {
     >
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/goit-react-hw-05-movies" element={<HomePage/>}>
+          <Route path="/goit-react-hw-05-movies/" element={<HomePage/>}>
             <Route index element={<TrendingPage />}></Route>
             <Route path="movies" element={<MoviesPage/>}>
             </Route>
