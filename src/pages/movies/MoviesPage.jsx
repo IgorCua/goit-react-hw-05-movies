@@ -10,7 +10,7 @@ export const MoviesPage = () =>{
     useEffect(()=>{
         if (query){
             searchMovieAPI(query).then(req => setReqArr(req));
-            console.log('useEffect if')
+            // console.log('useEffect if')
         } else {
             return;
         }
