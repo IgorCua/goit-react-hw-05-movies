@@ -14,8 +14,6 @@ import { AdditionalInfo } from "./movies/Additionalnfo";
 
 
 export const App = () => {
-  
-
   return (
     <div
       style={{
